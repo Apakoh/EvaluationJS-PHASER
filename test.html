@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Peach</title>
+</head>
+<body>
+<script>
+
+const students = [
+  { lastName: 'Laurent', firstName: 'Sacha', dateOfBirth: new Date('1958-10-07'), city: 'Nantes'},
+  { lastName: 'Huet', firstName: 'Alicia', dateOfBirth: new Date('1965-04-22'), city: 'Argenteuil'},
+];
+
+
+function mineur(liste, dateMaxMineur)
+{
+    for(var s in students)
+    {
+      if(students[s]['dateOfBirth'] < dateMaxMineur)
+      {
+        console.log(students[s]['firstName']);
+      }
+    }
+}
+
+mineur(students,new Date('1958-11-07'));
+
+function simplifier(tab)
+{
+    var result = tab.sort(function(a,b){return a - b;});
+    var res = [];
+    for (i in result)
+    {
+      if(!(res.includes(result[i])))
+      {
+        res.push(result[i]);
+      }
+    }
+    return res;
+}
+
+console.log(simplifier([0, 9, 8, 3, 3, 3, 5, 9, 5, 0]));
+
+</script>
+</body>
+</html>

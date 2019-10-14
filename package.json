@@ -1,0 +1,9 @@
+{
+  "name": "Peach",
+  "version": "0.0.0",
+  "description": "Peach Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
