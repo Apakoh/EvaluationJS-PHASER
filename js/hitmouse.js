@@ -15,20 +15,49 @@ const config = {
 
 function preload()
 {
-  this.load.image('background', 'cloud.jpg');
-  this.load.image('target', 'target.png');
+  this.load.image('background', 'Assets/cloud.jpg');
+  this.load.image('target', 'Assets/target.png');
 
 }
 function create()
 {
   background = this.add.tileSprite(0, 0, windowWidth*2, windowHeight*2, 'background');
-  //plane  = this.add.image(400, 300, 'planeSU57').setScale(1);
-  target = this.add.sprite(400, 300, 'target').setScale(1);
 }
+
+
+
 function update()
 {
+  background._tilePosition.x += 2;
 
+  target = this.add.sprite(randomInteger(windowWidth), randomInteger(windowHeight), 'target').setScale(0.2);
+  this.time.addEvent({delay: 1000,callback: deleteTarget,args: [target]});
+  nbTargets += 1;
+  target.setInteractive();
+  target.on('pointerdown', destroyTarget);
 }
 
 
+
+var background;
+var target;
+var nbTargets = 0;
+var hit = 0;
 const game = new Phaser.Game(config);
+
+function destroyTarget()
+{
+  hit += 1;
+  console.log("Hit : " + hit + " / Targets : " + nbTargets)
+  this.destroy();
+}
+
+function deleteTarget(sprite)
+{
+  sprite.destroy();
+}
+
+function randomInteger(range)
+{
+  return Math.floor(Math.random() * Math.floor(range+1));
+}

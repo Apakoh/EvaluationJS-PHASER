@@ -4,7 +4,7 @@ const port = 3000;
 const address = "0.0.0.0";
 
 server.use("/Assets", express.static(__dirname + '/Assets'));
-server.use("/js", express.static(__dirname + '/Assets'));
+server.use("/JS", express.static(__dirname + '/JS'));
 
 server.engine('html', require('atpl').__express);
 server.set('devel', false);
@@ -27,7 +27,6 @@ async function run()
     server.listen(process.env.PORT || port, address, function() {
         console.log('Listening to port:  ' + port);
     });
-
 }
 
 run();
