@@ -40,7 +40,10 @@ class First_Scene extends Phaser.Scene
 
       // Target Creation
       console.log(currentTimer);
-      createTarget(this, 1 + currentTimer/difficulty);
+      if(nbTargetsTemp == 0)
+      {
+        createTarget(this, 1 + currentTimer/difficulty);
+      }
     }
     else
     {
@@ -62,6 +65,8 @@ var target;
 var nbTargets = 0;
 var hit = 0;
 var pause = false;
+var nbTargetsTemp = 0;
+const minimalTimeSpawn = 1000;
 
 // Difficulty
 const difficulty = 10;
@@ -83,13 +88,18 @@ function timeCounter()
 function destroyTarget()
 {
   hit += 1;
+  nbTargetsTemp -= 1;
   console.log("Hit : " + hit + " / Targets : " + nbTargets)
   this.destroy();
 }
 
 function deleteTarget(sprite)
 {
-  sprite.destroy();
+  if(sprite.scene != undefined)
+  {
+    sprite.destroy();
+    nbTargetsTemp -= 1;
+  }
 }
 
 function randomInteger(range)
@@ -106,9 +116,10 @@ function createTarget(thisGame, nbSpawnTargets)
     target.setInteractive();
     target.on('pointerdown', destroyTarget);
     // Ajout Timer
-    thisGame.time.addEvent({delay: randomInteger(2000),callback: deleteTarget,args: [target]});
+    thisGame.time.addEvent({delay: randomInteger(2000) + minimalTimeSpawn,callback: deleteTarget,args: [target]});
     // Count
     nbTargets += 1;
+    nbTargetsTemp +=1;
   }
 }
 
