@@ -31,7 +31,7 @@ class First_Scene extends Phaser.Scene
     if(!pause)
     {
       // Moving Background
-      background._tilePosition.x += 2;
+      background._tilePosition.x += timer/2;
 
       // Target Creation
       if(nbTargetsTemp == 0)
