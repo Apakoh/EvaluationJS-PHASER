@@ -16,7 +16,8 @@ class First_Scene extends Phaser.Scene
   {
     currentGame = this;
     background = currentGame.add.tileSprite(0, 0, windowWidth*2, windowHeight*2, 'background');
-    gestionUIRealTime();
+    gestionUITimer();
+    gestionUIScore();
     startTimer(0);
   }
 
@@ -31,9 +32,6 @@ class First_Scene extends Phaser.Scene
     {
       // Moving Background
       background._tilePosition.x += 2;
-
-      // UI Gestion
-      gestionUIRealTime();
 
       // Target Creation
       if(nbTargetsTemp == 0)
@@ -83,6 +81,7 @@ function destroyTarget()
   nbTargetsTemp -= 1;
   console.log("Hit : " + hit + " / Targets : " + nbTargets)
   this.destroy();
+  gestionUIScore();
 }
 
 function deleteTarget(sprite)
@@ -112,10 +111,12 @@ function createTarget(nbSpawnTargets)
     // Count
     nbTargets += 1;
     nbTargetsTemp +=1;
+    // UI Update
+    gestionUIScore();
   }
 }
 
-function gestionUIRealTime()
+function gestionUITimer()
 {
   // Timer UI
   if(timerUI != undefined)
@@ -123,7 +124,10 @@ function gestionUIRealTime()
     timerUI.destroy();
   }
   timerUI = currentGame.add.text(windowWidth*0.03, windowHeight*0.03, 'Timer : ' + timer, { fontFamily: '"Roboto Condensed"', fontSize: 36 });
+}
 
+function gestionUIScore()
+{
   // Score UI
   if(scoreUI != undefined)
   {
@@ -135,6 +139,7 @@ function gestionUIRealTime()
 function startTimer(timeCount)
 {
   timer += timeCount;
+  gestionUITimer();
   console.log(timer);
   clock = currentGame.time.addEvent({
     delay: 1000,
