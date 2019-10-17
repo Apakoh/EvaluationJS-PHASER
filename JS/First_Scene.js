@@ -93,9 +93,9 @@ function deleteTarget(sprite)
   }
 }
 
-function randomInteger(range)
+function randomInteger(rangeMin, rangeMax)
 {
-  return Math.floor(Math.random() * Math.floor(range+1));
+  return rangeMin + Math.floor(Math.random() * ((rangeMax+1) - rangeMin));
 }
 
 function createTarget(nbSpawnTargets)
@@ -103,11 +103,11 @@ function createTarget(nbSpawnTargets)
   for(var i=0; i < nbSpawnTargets; i++)
   {
     // Target Creation
-    target = currentGame.add.sprite(randomInteger(windowWidth), randomInteger(windowHeight), 'target').setScale(0.2);
+    target = currentGame.add.sprite(randomInteger(windowWidth*0.10, windowWidth - windowWidth*0.10), randomInteger(windowHeight*0.10, windowHeight - windowHeight*0.10), 'target').setScale(0.2);
     target.setInteractive();
     target.on('pointerdown', destroyTarget);
     // Ajout Timer
-    currentGame.time.addEvent({delay: randomInteger(2000) + minimalTimeSpawn, callback: deleteTarget, args: [target]});
+    currentGame.time.addEvent({delay: randomInteger(0, 2000) + minimalTimeSpawn, callback: deleteTarget, args: [target]});
     // Count
     nbTargets += 1;
     nbTargetsTemp +=1;
