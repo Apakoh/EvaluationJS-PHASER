@@ -7,7 +7,7 @@ const configGame = {
   width: windowWidth,
   height: windowHeight,
   transparent: true,
-  scene: [Main_Scene, First_Scene]
+  scene: [Main_Scene, First_Scene, Pause_Scene]
 };
 
 const game = new Phaser.Game(configGame);
