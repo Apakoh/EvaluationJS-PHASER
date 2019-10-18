@@ -15,7 +15,7 @@ class Main_Scene extends Phaser.Scene
 
   create()
   {
-    backgroundMenu = scene_MainScene.add.sprite(windowWidth*0.5, windowHeight*0.40, 'Background_Menu').setScale(2);
+    backgroundMenu = scene_MainScene.add.sprite(windowWidth*0.5, windowHeight*0.5, 'Background_Menu').setScale(2);
     play_Button_Menu = scene_MainScene.add.sprite(backgroundMenu.x, backgroundMenu.y*0.75, 'Play_Menu').setScale(1.2);
     hit_Target_Menu = scene_MainScene.add.sprite(backgroundMenu.x, play_Button_Menu.y + play_Button_Menu.height*1.2, 'Hit_Target_Menu').setScale(1.2);
 
