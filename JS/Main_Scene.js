@@ -8,17 +8,20 @@ class Main_Scene extends Phaser.Scene
   preload()
   {
     this.load.image('Background_Menu', 'Assets/Menu_Background.png');
-    this.load.image('New_Game_Menu', 'Assets/New_Game.png');
+    this.load.image('Play_Menu', 'Assets/Play_Button.png');
+    this.load.image('Hit_Target_Menu', 'Assets/Hit_Target.png');
+
   }
 
   create()
   {
     backgroundMenu = scene_MainScene.add.sprite(windowWidth*0.5, windowHeight*0.40, 'Background_Menu').setScale(2);
-    new_Game_Menu = scene_MainScene.add.sprite(windowWidth*0.5, windowHeight*0.40, 'New_Game_Menu').setScale(2);
+    play_Button_Menu = scene_MainScene.add.sprite(backgroundMenu.x, backgroundMenu.y*0.75, 'Play_Menu').setScale(1.2);
+    hit_Target_Menu = scene_MainScene.add.sprite(backgroundMenu.x, play_Button_Menu.y + play_Button_Menu.height*1.2, 'Hit_Target_Menu').setScale(1.2);
 
     // Event
-    new_Game_Menu.setInteractive();
-    new_Game_Menu.on('pointerdown', startNewGame);
+    hit_Target_Menu.setInteractive();
+    hit_Target_Menu.on('pointerdown', startNewGame);
 
     // Inputs
     this.input.keyboard.on('keydown_SPACE', function (event) {
@@ -28,7 +31,8 @@ class Main_Scene extends Phaser.Scene
 }
 
 var backgroundMenu;
-var new_Game_Menu;
+var hit_Target_Menu;
+var play_Button_Menu;
 
 function startNewGame()
 {

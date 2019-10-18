@@ -14,8 +14,9 @@ class First_Scene extends Phaser.Scene
 
   create()
   {
-    currentGame = this;
-    background = currentGame.add.tileSprite(0, 0, windowWidth*2, windowHeight*2, 'background');
+    background = scene_FirstScene.add.tileSprite(0, 0, windowWidth*2, windowHeight*2, 'background');
+    // Lock Background
+    background.scrollFactor = 0;
     gestionUITimer();
     gestionUIScore();
     startTimer(0);
@@ -27,7 +28,6 @@ class First_Scene extends Phaser.Scene
   // Running Thread
   update()
   {
-    currentGame = this;
     if(!pause)
     {
       // Moving Background
@@ -43,9 +43,6 @@ class First_Scene extends Phaser.Scene
 
 }
 
-
-// Global
-var currentGame;
 
 // Game related
 var background;
@@ -75,7 +72,7 @@ function timeCounter()
   return Math.floor(new Date().getTime()/1000);
 }
 
-function destroyTarget()
+function destroyTarget(event)
 {
   hit += 1;
   nbTargetsTemp -= 1;
@@ -103,11 +100,11 @@ function createTarget(nbSpawnTargets)
   for(var i=0; i < nbSpawnTargets; i++)
   {
     // Target Creation
-    target = currentGame.add.sprite(randomInteger(windowWidth*0.10, windowWidth - windowWidth*0.10), randomInteger(windowHeight*0.10, windowHeight - windowHeight*0.10), 'target').setScale(0.2);
+    target = scene_FirstScene.add.sprite(randomInteger(windowWidth*0.10, windowWidth - windowWidth*0.10), randomInteger(windowHeight*0.10, windowHeight - windowHeight*0.10), 'target').setScale(0.2);
     target.setInteractive();
     target.on('pointerdown', destroyTarget);
     // Ajout Timer
-    currentGame.time.addEvent({delay: randomInteger(0, 2000) + minimalTimeSpawn, callback: deleteTarget, args: [target]});
+    scene_FirstScene.time.addEvent({delay: randomInteger(0, 2000) + minimalTimeSpawn, callback: deleteTarget, args: [target]});
     // Count
     nbTargets += 1;
     nbTargetsTemp +=1;
@@ -123,7 +120,7 @@ function gestionUITimer()
   {
     timerUI.destroy();
   }
-  timerUI = currentGame.add.text(windowWidth*0.03, windowHeight*0.03, 'Timer : ' + timer, { fontFamily: '"Roboto Condensed"', fontSize: 36 });
+  timerUI = scene_FirstScene.add.text(windowWidth*0.03, windowHeight*0.03, 'Timer : ' + timer, { fontFamily: '"Roboto Condensed"', fontSize: 36 });
 }
 
 function gestionUIScore()
@@ -133,7 +130,7 @@ function gestionUIScore()
   {
     scoreUI.destroy();
   }
-  scoreUI = currentGame.add.text(timerUI.x, timerUI.y + timerUI.height, 'Score : ' + hit + ' / ' + nbTargets, { fontFamily: '"Roboto Condensed"', fontSize: 34 });
+  scoreUI = scene_FirstScene.add.text(timerUI.x, timerUI.y + timerUI.height, 'Score : ' + hit + ' / ' + nbTargets, { fontFamily: '"Roboto Condensed"', fontSize: 34 });
 }
 
 function startTimer(timeCount)
@@ -141,7 +138,7 @@ function startTimer(timeCount)
   timer += timeCount;
   gestionUITimer();
   console.log(timer);
-  clock = currentGame.time.addEvent({
+  clock = scene_FirstScene.time.addEvent({
     delay: 1000,
     callback: startTimer,
     args: [1]
