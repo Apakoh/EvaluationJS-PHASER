@@ -44,13 +44,20 @@ function pauseGame()
   if(!pause)
   {
     pause = true;
-    scene_MainScene.scene.pause("First_Scene");
+    scene_MainScene.scene.pause('First_Scene');
     scene_MainScene.scene.launch('Pause_Scene');
   }
   else
   {
     pause = false;
     scene_MainScene.scene.sleep('Pause_Scene');
-    scene_MainScene.scene.resume("First_Scene");
+    scene_MainScene.scene.resume('First_Scene');
   }
+}
+
+function menuGame()
+{
+  scene_MainScene.scene.stop('First_Scene');
+  scene_MainScene.scene.stop('Pause_Scene');
+  scene_MainScene.scene.launch('Main_Scene');
 }

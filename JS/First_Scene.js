@@ -10,6 +10,7 @@ class First_Scene extends Phaser.Scene
   {
     this.load.image('background', 'Assets/cloud.jpg');
     this.load.image('target', 'Assets/target.png');
+    this.load.image('Pause_Button', 'Assets/Pause_Button.png');
   }
 
   create()
@@ -17,6 +18,10 @@ class First_Scene extends Phaser.Scene
     background = scene_FirstScene.add.tileSprite(0, 0, windowWidth*2, windowHeight*2, 'background');
     // Lock Background
     background.scrollFactor = 0;
+    pause_Button_First_Scene = scene_FirstScene.add.sprite(windowWidth*0.95, windowHeight*0.08, 'Pause_Button').setScale(0.7);
+    pause_Button_First_Scene.setInteractive();
+    pause_Button_First_Scene.on('pointerdown', pauseGame);
+
     gestionUITimer();
     gestionUIScore();
     startTimer(0);
@@ -47,6 +52,7 @@ class First_Scene extends Phaser.Scene
 // Game related
 var background;
 var target;
+var pause_Button_First_Scene;
 var nbTargets = 0;
 var hit = 0;
 var pause = false;
