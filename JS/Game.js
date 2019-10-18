@@ -11,3 +11,6 @@ const configGame = {
 };
 
 const game = new Phaser.Game(configGame);
+var scene_FirstScene;
+var scene_MainScene;
+var scene_PauseMenu;

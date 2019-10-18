@@ -3,7 +3,7 @@ class First_Scene extends Phaser.Scene
 
   constructor()
   {
-    super({key:'First_Scene', active: true});
+    scene_FirstScene = super({key:'First_Scene', active: false});
   }
 
   preload()
@@ -133,7 +133,7 @@ function gestionUIScore()
   {
     scoreUI.destroy();
   }
-  scoreUI = currentGame.add.text(windowWidth*0.03, windowHeight*0.07, 'Score : ' + hit + ' / ' + nbTargets, { fontFamily: '"Roboto Condensed"', fontSize: 34 });
+  scoreUI = currentGame.add.text(timerUI.x, timerUI.y + timerUI.height, 'Score : ' + hit + ' / ' + nbTargets, { fontFamily: '"Roboto Condensed"', fontSize: 34 });
 }
 
 function startTimer(timeCount)
@@ -146,18 +146,4 @@ function startTimer(timeCount)
     callback: startTimer,
     args: [1]
   });
-}
-
-function pauseGame()
-{
-  if(!pause)
-  {
-    pause = true;
-    currentGame.scene.pause("First_Scene");
-  }
-  else
-  {
-    pause = false;
-    currentGame.scene.resume("First_Scene");
-  }
 }
